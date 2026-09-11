@@ -1,0 +1,21 @@
+name: Mirror
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch worldstate
+        run: curl -fsSL -A "wf" "https://api.warframestat.us/pc/?language=zh" -o worldstate.json
+      - name: Commit
+        run: |
+          git config user.name "wf"
+          git config user.email "wf@users.noreply.github.com"
+          git add worldstate.json
+          git commit -m "update" || echo "no change"
+          git push
