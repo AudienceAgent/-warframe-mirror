@@ -1,17 +1,3 @@
-# ============================================================
-# Audience Warframe · 共享镜像（世界状态 + 市场行情）GitHub Action
-#
-# v1.5 起新增：每 30 分钟抓一轮 warframe.market 实时报价（198 件在榜商品），
-#   写入 market.json。应用经 gh-proxy / jsdelivr 读取，市场页从此国内直达。
-#
-# 更新方法（一次性，约 1 分钟）：
-#   1. 打开你的镜像仓库 AudienceAgent/-warframe-mirror
-#   2. 用本文件整体替换 .github/workflows/mirror.yml
-#   3. Actions 标签页 → Run workflow 手动跑一次，确认仓库里出现 market.json
-#   之后全自动，无需再管。
-# ============================================================
-name: Mirror Warframe worldstate + market
-
 on:
   schedule:
     - cron: "*/10 * * * *"
